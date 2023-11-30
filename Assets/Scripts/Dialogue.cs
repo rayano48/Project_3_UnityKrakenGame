@@ -12,8 +12,8 @@ public class Dialogue : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.SetActive(false);
         _textComponent.text = string.Empty;
-        startDialogue();
     }
 
     // Update is called once per frame
@@ -33,33 +33,33 @@ public class Dialogue : MonoBehaviour
         }
     }
 
-        void startDialogue()
+    public void startDialogue()
+    {
+        index = 0;
+        StartCoroutine(_typeLine());
+    }
+
+    IEnumerator _typeLine()
+    {
+        foreach (char c in _lines[index].ToCharArray())
         {
-            index = 0;
+            _textComponent.text += c;
+            yield return new WaitForSeconds(_textspeed);
+        }
+    }
+
+    void nextLine()
+    {
+        if (index < _lines.Length - 1)
+        {
+            index++;
+            _textComponent.text = string.Empty;
             StartCoroutine(_typeLine());
         }
-
-        IEnumerator _typeLine()
+        else
         {
-            foreach (char c in _lines[index].ToCharArray())
-            {
-                _textComponent.text += c;
-                yield return new WaitForSeconds(_textspeed);
-            }
+            gameObject.SetActive(false);
         }
-
-        void nextLine()
-        {
-            if (index < _lines.Length - 1)
-            {
-                index++;
-                _textComponent.text = string.Empty;
-                StartCoroutine(_typeLine());
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
-        }
+    }
 }
 

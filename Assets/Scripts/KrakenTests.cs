@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class KrakenTests : MonoBehaviour
 {
     [SerializeField] private Image _box;
+    [SerializeField] Dialogue _dialogue;
+    [SerializeField] GameObject _diabox;
   
     private void OnTriggerEnter(Collider other)
     {
@@ -16,7 +18,8 @@ public class KrakenTests : MonoBehaviour
             //spawn ui needed
             Debug.Log("character found!");
             _box.enabled = true;
-            
+            _diabox.SetActive(true);
+            _dialogue.startDialogue();
         }
     }
 }
