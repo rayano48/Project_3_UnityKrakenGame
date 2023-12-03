@@ -9,6 +9,7 @@ public class Dialogue : MonoBehaviour
     public string[] _lines;
     public float _textspeed;
     private int index;
+    [SerializeField] KrakenTests _portraitTrigger;
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +60,7 @@ public class Dialogue : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            _portraitTrigger.PortraitOff();
         }
     }
 }
