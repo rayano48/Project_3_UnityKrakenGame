@@ -10,6 +10,7 @@ public class Dialogue : MonoBehaviour
     public float _textspeed;
     private int index;
     [SerializeField] KrakenTests _portraitTrigger;
+    [SerializeField] AudioSource _textScroll;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,7 @@ public class Dialogue : MonoBehaviour
     {
         index = 0;
         StartCoroutine(_typeLine());
+        _textScroll.Play();
     }
 
     IEnumerator _typeLine()
@@ -61,6 +63,7 @@ public class Dialogue : MonoBehaviour
         {
             gameObject.SetActive(false);
             _portraitTrigger.PortraitOff();
+            _textScroll.Stop();
         }
     }
 }
